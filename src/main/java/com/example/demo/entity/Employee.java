@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -31,9 +32,9 @@ public class Employee {
     @JsonProperty("department_id")
     private Department department;
 
-    @Getter
-    @OneToMany(mappedBy = "employee")
+    @OneToMany(mappedBy = "employee", fetch = FetchType.EAGER)
     @JsonProperty("leaves")
+    @JsonIgnore
     private List<Leave> leaves;
 
     public void setName(String name) {
@@ -54,5 +55,33 @@ public class Employee {
 
     public void setLeaves(List<Leave> leaves) {
         this.leaves = leaves;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public List<Leave> getLeaves() {
+        return leaves;
     }
 }

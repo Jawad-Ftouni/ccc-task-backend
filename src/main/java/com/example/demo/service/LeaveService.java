@@ -6,6 +6,7 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class LeaveService {
@@ -45,5 +46,13 @@ public class LeaveService {
                 .orElseThrow(() -> new EntityNotFoundException("Leave not found with id: " + id));
 
         leaveRepository.delete(leave);
+    }
+
+    public Optional<Leave> getLeaveById(Long id) {
+         Optional<Leave> leave = this.leaveRepository.findById(id);
+         if (leave.isPresent()){
+             return leave;
+         }
+        return null;
     }
 }

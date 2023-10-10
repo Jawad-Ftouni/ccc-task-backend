@@ -6,6 +6,7 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EmployeeService {
@@ -43,5 +44,13 @@ public class EmployeeService {
                 .orElseThrow(() -> new EntityNotFoundException("Employee not found with id: " + id));
 
         employeeRepository.delete(employee);
+    }
+
+    public Optional<Employee> getEmployeeById(Long id) {
+        Optional<Employee> employee = this.employeeRepository.findById(id);
+        if(employee.isPresent()){
+            return employee;
+        }
+        return null;
     }
 }

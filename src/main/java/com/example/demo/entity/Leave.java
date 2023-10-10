@@ -22,6 +22,11 @@ public class Leave {
     @JsonProperty("start_date")
     private Date start_date;
 
+    @JoinColumn(name = "employee_id")
+    @ManyToOne
+    private Employee employee;
+
+
     @Column(name = "end_date")
     @JsonProperty("end_date")
     private Date end_date;
@@ -34,11 +39,7 @@ public class Leave {
     @JsonProperty("note")
     private String note;
 
-    @ManyToOne
-    @JoinColumn(name = "employee_id")
-    @JsonProperty("employee_id")
-    private Employee employee;
-    // Constructors, getters, setters, and other methods
+
 
 
     public void setId(Long id) {
@@ -68,5 +69,6 @@ public class Leave {
     public void setStart_date(Date start_date) {
         this.start_date = start_date;
     }
+
 
 }
